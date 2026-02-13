@@ -1,3 +1,9 @@
+MEMBERS:
+DE LA CRUZ, GHEAN ARNELLE D.
+CANOY, JOHN PAUL B.
+ABAYGAR, ANTHEA JANE P.
+PALATA, RIA MAE S.
+
 🚀 CodeIgniter 4 CRUD Application (CI4-CRUD)
 
 Welcome to the CI4 CRUD project — a simple, powerful, and beginner-friendly CRUD (Create, Read, Update, Delete) application built using the modern CodeIgniter 4 framework.
