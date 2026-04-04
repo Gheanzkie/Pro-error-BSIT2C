@@ -11,7 +11,7 @@ class LogModel extends Model
     protected $primaryKey = 'LOGID';
     protected $allowedFields = [
         'USERID', 'USER_NAME', 'ACTION', 'DATELOG', 'TIMELOG',
-        'user_ip_address', 'device_used', 'identifier'
+        'user_ip_address', 'device_used', 'identifier',
     ];
 
     public function addLog(string $action, string $type = '')

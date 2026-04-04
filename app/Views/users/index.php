@@ -38,7 +38,7 @@
                     <th>No.</th>
                     <th style="display:none;">id</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Username</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Phone</th>
@@ -73,8 +73,8 @@
               </div>
 
               <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required />
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" required />
               </div>
               <div class="form-group">
                 <label>Password</label>
@@ -87,8 +87,8 @@
                     <label>Role</label>
                     <select class="form-control" name="role">
                       <option value="Admin">Admin</option>
-                      <option value="User">User</option>
-                      <option value="Guest">Guest</option>
+                      <option value="Staff">Staff</option>
+                      <option value="Part-Time">Part-Time</option>
                     </select>
                   </div>
                 </div>
@@ -118,7 +118,9 @@
       </form>
     </div>
   </div>
-
+ 
+ 
+  <!--Edit user-->
   <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -140,8 +142,8 @@
               </div>
 
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <label>Username</label>
+              <input type="text" class="form-control" id="username" name="username" required>
             </div>
 
             <div class="form-group">
@@ -155,8 +157,8 @@
                     <label>Role</label>
                     <select class="form-control" name="role" id="role">
                       <option value="Admin">Admin</option>
-                      <option value="User">User</option>
-                      <option value="Guest">Guest</option>
+                      <option value="Staff">Staff</option>
+                      <option value="Part-Time">Part-Time</option>
                     </select>
                   </div>
                 </div>

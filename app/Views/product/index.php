@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Student Accounts</h1>
+          <h1 class="m-0">Product Management</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active">Product Management</li>
           </ol>
         </div>
       </div>
@@ -24,10 +24,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">List of Student Accounts</h3>
+              <h3 class="card-title">List of Products</h3>
               <div class="float-right">
                 <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#AddNewModal">
-                  <i class="fa fa-plus-circle fa fw"></i> Add New
+                  <i class="fa fa-plus-circle fa fw"></i> Add New Product
                 </button>
               </div>
             </div>
@@ -37,10 +37,10 @@
                   <tr>
                     <th>No.</th>
                     <th style="display:none;">id</th>
+                    <th>category</th>
                     <th>Name</th>
-                    <th>Birthday</th>
-                    <th>Course</th>
-                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Stock</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -53,7 +53,6 @@
       </div>
     </div>
 
-    <!-- ✅ Add New Modal -->
     <div class="modal fade" id="AddNewModal" tabindex="-1" role="dialog" aria-labelledby="AddNewModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <form id="addUserForm">
@@ -63,30 +62,36 @@
               <h5 class="modal-title"><i class="fa fa-plus-circle fa fw"></i>  Add New</h5>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
             <div class="modal-body">
+              
+              <div class="form-group">
+                <label>Category</label>
+                <select name="category_id" class="form-select form-control" required>
+                  <option value="" selected disabled>Select Category</option>
+                  <option value="1">Beverages</option>
+                  <option value="2">Snacks</option>
+                  <option value="3">Canned Goods</option>
+                  <option value="4">Personal Care</option>
+                  <option value="5">Household Items</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" required />
               </div>
 
               <div class="form-group">
-                <label>Birthday</label>
-                <input type="date" name="bday" class="form-control" required />
+                <label>Price</label>
+                <input type="number" name="price" class="form-control" required />
               </div>
 
               <div class="form-group">
-                <label>Course</label>
-                <input type="text" name="course" class="form-control" required />
+                <label>Stock</label>
+                <input type="number" name="stock" class="form-control" required />
               </div>
-
-              <div class="form-group">
-                <label>Address</label>
-                <input type="text" name="address" class="form-control" required />
-              </div>
-          </div>
-
-          <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class='fas fa-times-circle'></i> Cancel</button>
             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
           </div>
@@ -108,27 +113,35 @@
            <?= csrf_field() ?>
           <div class="modal-body">
 
-            <input type="hidden" id="userId" name="id">
+            <input type="hidden" id="id" name="id">
 
              <div class="form-group">
+            <label>Category</label>
+            <select name="category_id" id="category_id" class="form-select form-control" required>
+            <option value="" selected disabled>Select Category</option>
+            <option value="1">Beverages</option>
+            <option value="2">Snacks</option>
+            <option value="3">Canned Goods</option>
+            <option value="4">Personal Care</option>
+            <option value="5">Household Items</option>
+           </select>
+         </div>
+        
+
+              <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" id="name" class="form-control" required />
               </div>
 
-            <div class="form-group">
-              <label for="email">Birtday</label>
-              <input type="date" class="form-control" id="bday" name="bday" required>
-            </div>
+              <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="price" id="price" class="form-control" required />
+              </div>
 
-            <div class="form-group">
-              <label for="email">course</label>
-              <input type="text" class="form-control" id="course" name="course" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Address</label>
-              <input type="text" class="form-control" id="address" name="address" required>
-            </div>
+              <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" id="stock" class="form-control" required />
+              </div>
 
           </div>
           <div class="modal-footer">
@@ -147,5 +160,5 @@
 
 <?= $this->section('scripts') ?>
 <script> const baseUrl = "<?= base_url() ?>"; </script>
-<script src="<?= base_url('js/student/student.js') ?>"></script>
+<script src="<?= base_url('js/product/product.js') ?>"></script>
 <?= $this->endSection() ?>

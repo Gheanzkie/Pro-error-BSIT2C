@@ -8,9 +8,11 @@ class UserModel extends Model
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
+    protected $allowedFields = [
+        'id', 'username', 'password', 'role', 'status', 'name', 'phone', 'created_at', 'updated_at', 'deleted_at'
+    ];
 
-    protected $allowedFields = ['uuid','email', 'password','role','status','name','phone', 'created_at', 'updated_at', 'deleted_at'];
-
+    // Fetch paginated & searchable records (for datatable)
     public function getRecords($start, $length, $searchValue = '')
     {
         $builder = $this->builder();
@@ -18,12 +20,11 @@ class UserModel extends Model
 
         if (!empty($searchValue)) {
             $builder->groupStart()
-                ->like('email', $searchValue)
+                ->like('username', $searchValue)
                 ->orLike('name', $searchValue)
                 ->groupEnd();
         }
 
-        // Clone builder for filtered count before applying limit
         $filteredBuilder = clone $builder;
         $filteredRecords = $filteredBuilder->countAllResults();
 
@@ -31,5 +32,10 @@ class UserModel extends Model
         $data = $builder->get()->getResultArray();
 
         return ['data' => $data, 'filtered' => $filteredRecords];
+    }
+    public function getTotalStaff()
+    {
+        $builder = $this->builder();
+        return $builder->countAllResults(false);
     }
 }

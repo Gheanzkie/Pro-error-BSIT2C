@@ -204,5 +204,5 @@ class App extends BaseConfig
      */
     public bool $CSPEnabled = false;
         // Enable CSRF protection
-    public $CSRFProtection = true;
+    public $CSRFProtection = false;
 }

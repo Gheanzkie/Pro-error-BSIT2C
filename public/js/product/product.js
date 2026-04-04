@@ -9,7 +9,7 @@ function showToast(type, message) {
 $('#addUserForm').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-        url: baseUrl + 'student/save',
+        url: baseUrl + 'product/save',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -17,12 +17,12 @@ $('#addUserForm').on('submit', function (e) {
             if (response.status === 'success') {
                 $('#AddNewModal').modal('hide');
                 $('#addUserForm')[0].reset();
-                showToast('success', 'student added successfully!');
+                showToast('success', 'Product added successfully!');
                 setTimeout(() => {
                     location.reload();
                 }, 1000); 
             } else {
-                showToast('error', response.message || 'Failed to add student.');
+                showToast('error', response.message || 'Failed to add Product.');
             }
         },
         error: function () {
@@ -34,23 +34,23 @@ $('#addUserForm').on('submit', function (e) {
 $(document).on('click', '.edit-btn', function () {
    const userId = $(this).data('id'); 
    $.ajax({
-    url: baseUrl + 'student/edit/' + userId,
+    url: baseUrl + 'product/edit/' + userId,
     method: 'GET',
     dataType: 'json',
     success: function (response) {
         if (response.data) {
+            $('#editUserModal #category_id').val(response.data.category_id);
             $('#editUserModal #name').val(response.data.name);
-            $('#editUserModal #userId').val(response.data.id);
-            $('#editUserModal #bday').val(response.data.bday);
-            $('#editUserModal #course').val(response.data.course);
-            $('#editUserModal #address').val(response.data.address);
+            $('#editUserModal #price').val(response.data.price);
+            $('#editUserModal #stock').val(response.data.stock);
+            $('#editUserModal #id').val(response.data.id);
             $('#editUserModal').modal('show');
         } else {
-            alert('Error fetching student data');
+            alert('Error fetching product data');
         }
     },
     error: function () {
-        alert('Error fetching student data');
+        alert('Error fetching product data');
     }
 });
 });
@@ -61,14 +61,14 @@ $(document).ready(function () {
         e.preventDefault(); 
 
         $.ajax({
-            url: baseUrl + 'student/update',
+            url: baseUrl + 'product/update',
             method: 'POST',
             data: $(this).serialize(),
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
                     $('#editUserModal').modal('hide');
-                    showToast('success', 'student Updated successfully!');
+                    showToast('success', 'Product Updated successfully!');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert('Error updating: ' + (response.message || 'Unknown error'));
@@ -87,9 +87,9 @@ $(document).on('click', '.deleteUserBtn', function () {
     const csrfName = $('meta[name="csrf-name"]').attr('content');
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    if (confirm('Are you sure you want to delete this student?')) {
+    if (confirm('Are you sure you want to delete this product?')) {
         $.ajax({
-            url: baseUrl + 'student/delete/' + userId,
+            url: baseUrl + 'product/delete/' + userId,
             method: 'POST', 
             data: {
                 _method: 'DELETE',
@@ -97,7 +97,7 @@ $(document).on('click', '.deleteUserBtn', function () {
             },
             success: function (response) {
                 if (response.success) {
-                    showToast('success', 'student deleted successfully.');
+                    showToast('success', 'product deleted successfully.');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert(response.message || 'Failed to delete.');
@@ -120,7 +120,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: baseUrl + 'student/fetchRecords',
+            url: baseUrl + 'product/fetchRecords',
             type: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -129,22 +129,24 @@ $(document).ready(function () {
         columns: [
         { data: 'row_number' },
         { data: 'id', visible: false },
+        { data: 'category_id' },
         { data: 'name' },
-        { data: 'bday' },
-        { data: 'course' },
-        { data: 'address' },
+        { data: 'price' },
+        { data: 'stock' },
         {
             data: null,
             orderable: false,
             searchable: false,
             render: function (data, type, row) {
                 return `
+                
                 <button class="btn btn-sm btn-warning edit-btn" data-id="${row.id}">
                 <i class="far fa-edit"></i>
                 </button>
                 <button class="btn btn-sm btn-danger deleteUserBtn" data-id="${row.id}">
                 <i class="fas fa-trash-alt"></i>
                 </button>
+                
                 `;
             }
         }
@@ -153,3 +155,4 @@ $(document).ready(function () {
         autoWidth: false
     });
 });
+

@@ -4,12 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TeacherModel extends Model
+class ProductModel extends Model
 {
-    protected $table = 'teacher';
+    protected $table = 'product';
     protected $primaryKey = 'id';
-
-    protected $allowedFields = ['name','salary'];
+    protected $allowedFields = ['id','category_id', 'name','price','stock'];
 
     public function getRecords($start, $length, $searchValue = '')
     {
@@ -18,17 +17,24 @@ class TeacherModel extends Model
 
         if (!empty($searchValue)) {
             $builder->groupStart()
+                ->like('category_id', $searchValue)
                 ->orLike('name', $searchValue)
                 ->groupEnd();
         }
 
-        // Clone builder for filtered count before applying limit
+        // Count filtered without resetting builder
         $filteredBuilder = clone $builder;
-        $filteredRecords = $filteredBuilder->countAllResults();
+        $filteredRecords = $filteredBuilder->countAllResults(false);
 
         $builder->limit($length, $start);
         $data = $builder->get()->getResultArray();
 
         return ['data' => $data, 'filtered' => $filteredRecords];
+    }
+
+    public function getTotalProduct()
+    {
+        $builder = $this->builder();
+        return $builder->countAllResults();
     }
 }

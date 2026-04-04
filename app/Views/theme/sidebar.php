@@ -12,7 +12,7 @@
     top: 0;
     height: 100%;
     width: 4px;
-    background: orange;
+    background: orange ;
     border-radius: 0 3px 3px 0;
 
     transform: scaleY(0);
@@ -64,19 +64,20 @@ body.dark-mode .main-sidebar .nav-icon {
 /* Active or hovered link */
 body.dark-mode .main-sidebar .nav-link.active,
 body.dark-mode .main-sidebar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* slightly lighter bg on hover/active */
+    background-color: rgba(37, 9, 9, 0.1) !important; /* slightly lighter bg on hover/active */
 }
 
 </style>
 
 
-<aside class="main-sidebar sidebar-light-light sidebar-light elevation-5" id="mainSidebar">
+<aside class="main-sidebar sidebar-light-light sidebar-light elevation-5"  id="mainSidebar">
 <div class="brand-link bg-warning" id="brandLink" style="cursor: default; border-bottom: 1px rgba(255, 255, 255);">
-    <img src="<?= base_url('assets/adminlte/dist/img/AdminLTELogo.png') ?>" 
+    <img src="<?= base_url('assets/img/store.jpg') ?>" 
          alt="AdminLTE Logo" 
          class="brand-image img-circle elevation-3" 
-         style="opacity: .8">
-    <span class="brand-text font-weight-light" style="color: white">SMART BMIS</span>
+         style="opacity: 100%;">
+    <span class="brand-text font-weight-bold" style="color: Blue;">Hisona Store
+</span>
 </div>
   <div class="sidebar">
     <nav class="mt-2">
@@ -87,45 +88,42 @@ body.dark-mode .main-sidebar .nav-link:hover {
          <p>Dashboard</p>
        </a>
      </li>
+     
+     <?php if (session()->get('role') === 'admin'): ?>
       <li class="nav-item">
       <a href="<?= base_url('log') ?>" class="nav-link <?= is_active(1, 'log') ?>">
         <i class="nav-icon fas fa-history"></i>
         <p>Activity Logs</p>
       </a>
     </li>
+    <?php endif; ?>
+
+  
+
     <li class="nav-item">
-      <a href="<?= base_url('person') ?>" class="nav-link <?= is_active(1, 'person') ?>">
-        <i class="nav-icon fas fa-user-friends"></i>
-        <p>Person</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="<?= base_url('profiling') ?>" class="nav-link <?= is_active(1, 'profiling') ?>">
-        <i class="nav-icon fas fa-users"></i>
-        <p>Profile</p>
+      <a href="<?= base_url('sales') ?>" class="nav-link ">
+        <i class="nav-icon fas fa-receipt"></i>
+        <p>Sales Items</p>
       </a>
     </li>
 
     <li class="nav-item">
-      <a href="<?= base_url('student') ?>" class="nav-link <?= is_active(1, 'student') ?>">
-        <i class="nav-icon fas fa-users"></i>
-        <p>Students</p>
+      <a href="<?= base_url('product') ?>" class="nav-link ">
+        <i class="nav-icon fas fa-bars"></i>
+        <p>Product Management</p>
       </a>
     </li>
 
-    <li class="nav-item">
-      <a href="<?= base_url('teacher') ?>" class="nav-link <?= is_active(1, 'teacher') ?>">
-        <i class="nav-icon fas fa-users"></i>
-        <p>Teacher</p>
-      </a>
-    </li>
 
-     <li class="nav-item">
-      <a href="<?= base_url('users') ?>" class="nav-link <?= is_active(1, 'users') ?>">
-        <i class="nav-icon fas fa-user-lock"></i>
-        <p>User Accounts</p>
-      </a>
-    </li>
+      <?php if (session()->get('role') === 'admin'): ?>
+      <li class="nav-item">
+          <a href="<?= base_url('users') ?>" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Account Management</p>
+          </a>
+      </li>
+      <?php endif; ?>
+
   </ul>
 </nav>
 </div>
